@@ -6,7 +6,7 @@ import numpy as np
 model = joblib.load('text_detection_model.pkl')
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://aitextfinder.vercel.app"}})
 
 @app.route('/api/detect', methods=['POST'])
 def detect():
