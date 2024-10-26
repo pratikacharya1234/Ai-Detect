@@ -11,14 +11,13 @@ const TextDetection = () => {
         e.preventDefault();
 
         try {
-       const response = await fetch('https://my-flask-app.onrender.com/api/detect', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ text_input: inputText }),
-});
-
+        const response = await fetch('http://127.0.0.1:5000/api/detect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text_input: inputText }),
+            });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
