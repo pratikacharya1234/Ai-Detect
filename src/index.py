@@ -4,12 +4,12 @@ import joblib
 import numpy as np
 import os
 
-# Update the model path to be relative to the file location
+
 model_path = os.path.join(os.path.dirname(__file__), 'text_detection_model.pkl')
 model = joblib.load(model_path)
 
 app = Flask(__name__)
-# Allow all origins for CORS in production (you can restrict this later)
+# Allow all origins for CORS in production
 CORS(app)
 
 @app.route('/api/detect', methods=['POST'])

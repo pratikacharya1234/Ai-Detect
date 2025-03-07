@@ -21,7 +21,7 @@ const TextDetection = () => {
         setError(null);
 
         try {
-            // Use relative path for API endpoint - works in both development and production
+            
             const response = await fetch('/api/detect', {
                 method: 'POST',
                 headers: {
