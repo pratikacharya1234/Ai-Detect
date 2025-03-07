@@ -2,11 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 import numpy as np
+import os
 
-model = joblib.load('text_detection_model.pkl')
+# Update the model path to be relative to the file location
+model_path = os.path.join(os.path.dirname(__file__), 'text_detection_model.pkl')
+model = joblib.load(model_path)
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://aitextfinder.vercel.app"}})
+# Allow all origins for CORS in production (you can restrict this later)
+CORS(app)
 
 @app.route('/api/detect', methods=['POST'])
 def detect():
@@ -33,5 +37,12 @@ def detect():
         'human_accuracy': human_accuracy
     })
 
+# Handler for serverless function
+from http.server import BaseHTTPRequestHandler
+
+def handler(event, context):
+    return app(event, context)
+
+# For local development
 if __name__ == '__main__':
     app.run(debug=True)
