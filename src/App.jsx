@@ -18,12 +18,7 @@ const TextDetection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        if (!inputText.trim()) {
-            setError("Please enter some text to analyze");
-            return;
-        }
-
-        if (inputText.length < 20) {
+        if (!inputText.trim() || inputText.length < 20) {
             setError("Please enter at least 20 characters for accurate analysis");
             return;
         }
@@ -37,7 +32,7 @@ const TextDetection = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ text_input: inputText }),
+                body: JSON.stringify({ text_input: inputText.trim() }),
             });
 
             if (!response.ok) {
