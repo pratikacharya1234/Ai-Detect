@@ -12,9 +12,6 @@ A modern web application that analyzes text to determine whether it was written 
 - ℹ️ Detailed result explanations
 - ⚡ Built with React and Vite
 
-## Demo
-
-[Live Demo](your-deployment-url-here)
 
 ## Tech Stack
 
