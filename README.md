@@ -17,7 +17,7 @@ A modern web application that analyzes text to determine whether it was written 
 
 - Frontend: React + Vite
 - Backend: Python (Flask)
-- Deployment: Vercel
+- Deployment: Railway
 
 ## Getting Started
 
@@ -101,16 +101,31 @@ VITE_API_URL=http://localhost:5000
 
 ## Deployment
 
-This project is configured for deployment on Vercel. The `vercel.json` file handles both frontend and backend deployment configurations.
+This project is configured for deployment on Railway.
 
-1. Install Vercel CLI:
+1. Install Railway CLI:
 ```bash
-npm install -g vercel
+npm i -g @railway/cli
 ```
 
-2. Deploy:
+2. Login to Railway:
 ```bash
-vercel
+railway login
+```
+
+3. Initialize Railway project:
+```bash
+railway init
+```
+
+4. Deploy the application:
+```bash
+railway up
+```
+
+The application will be automatically built and deployed to Railway. You can monitor the deployment status using:
+```bash
+railway status
 ```
 
 ## Contributing
