@@ -142,5 +142,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Pratik - [your-acharyapratik214@gmail.com](mailto:acharyapratik214@gmail.com)
+Pratik - [acharyapratik214@gmail.com](mailto:acharyapratik214@gmail.com)
 Project Link: [https://github.com/pratikacharya1234/Ai-Detect](https://github.com/pratikacharya1234/Ai-Detect)
