@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: ai-detect
-    env: python
-    buildCommand: pip install -r requirements.txt && npm install && npm run build
-    startCommand: python server.py
-    envVars:
-      - key: NODE_VERSION
-        value: 16.15.1

@@ -335,3 +335,63 @@ button:disabled {
     width: 100%;
   }
 }
+
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: white;
+}
+
+.navbar-brand a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  position: relative;
+  margin-left: 1.5rem;
+}
+
+.navbar-item a, .dropdown-toggle {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0.5rem 0;
+  background-color: #444;
+  min-width: 120px;
+  border-radius: 4px;
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-menu li:hover {
+  background-color: #555;
+}
