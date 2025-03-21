@@ -8,7 +8,16 @@ export default defineConfig({
       '/api': {
         target: process.env.RAILWAY_STATIC_URL || 'http://localhost:5000',
         changeOrigin: true,
-        secure: true
+        secure: false,
+        ws: true,
+        configure: (proxy, options) => {
+          proxy.on('error', (err, req, res) => {
+            console.error('proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            console.log('Sending Request:', req.method, req.url);
+          });
+        }
       }
     }
   },

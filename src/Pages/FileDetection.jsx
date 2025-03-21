@@ -24,19 +24,21 @@ const FileDetection = () => {
         formData.append('file', selectedFile);
 
         try {
-            const response = await fetch('/api/detect-file', {
+            const response = await fetch('/api/detect/file', { 
                 method: 'POST',
                 body: formData,
             });
 
             if (!response.ok) {
-                throw new Error('File upload failed');
+                const errorText = await response.text();
+                throw new Error(errorText || 'File upload failed');
             }
 
             const data = await response.json();
-            setResult(data.result);
+            setResult(data.prediction);
         } catch (error) {
-            setError('Error processing file: ' + error.message);
+            console.error('Upload error:', error);
+            setError(error.message || 'Error processing file. Please try again.');
         } finally {
             setIsLoading(false);
         }

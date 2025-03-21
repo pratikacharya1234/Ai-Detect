@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+# Handler for serverless function
+from http.server import BaseHTTPRequestHandler
 from flask_cors import CORS
 import joblib
 import numpy as np
@@ -37,8 +39,7 @@ def detect():
         'human_accuracy': human_accuracy
     })
 
-# Handler for serverless function
-from http.server import BaseHTTPRequestHandler
+
 
 def handler(event, context):
     return app(event, context)
