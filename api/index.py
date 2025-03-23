@@ -1,18 +1,27 @@
+import warnings
 from flask import Flask, request, jsonify
-# Handler for serverless function
-from http.server import BaseHTTPRequestHandler
 from flask_cors import CORS
 import joblib
 import numpy as np
 import os
 
+# Filter out scikit-learn version warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+
+app = Flask(__name__)
+CORS(app)
+
+def load_model():
+    try:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            return joblib.load('model/ai_detector_model.joblib')
+    except Exception as e:
+        print(f"Error loading model: {e}")
+        return None
 
 model_path = os.path.join(os.path.dirname(__file__), 'text_detection_model.pkl')
 model = joblib.load(model_path)
-
-app = Flask(__name__)
-# Allow all origins for CORS in production
-CORS(app)
 
 @app.route('/api/detect', methods=['POST'])
 def detect():
