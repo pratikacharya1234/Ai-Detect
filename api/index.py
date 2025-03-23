@@ -9,7 +9,7 @@ import os
 warnings.filterwarnings('ignore', category=UserWarning)
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}})
 
 def load_model():
     try:
@@ -25,30 +25,36 @@ model = joblib.load(model_path)
 
 @app.route('/api/detect', methods=['POST'])
 def detect():
-    data = request.get_json()
-    input_text = data['text_input']
-    
-    prediction = model.predict([input_text])[0]
-    probabilities = model.predict_proba([input_text])[0]
+    try:
+        data = request.get_json()
+        if not data or 'text_input' not in data:
+            return jsonify({'error': 'No text provided'}), 400
 
-    ai_probability = probabilities[1]
-    human_probability = probabilities[0]
+        input_text = data['text_input']
+        
+        prediction = model.predict([input_text])[0]
+        probabilities = model.predict_proba([input_text])[0]
 
-    if prediction == 1:
-        result = "AI-Generated"
-    else:
-        result = "Human-Written"
+        ai_probability = probabilities[1]
+        human_probability = probabilities[0]
 
-    ai_accuracy = round(ai_probability * 100, 2)
-    human_accuracy = round(human_probability * 100, 2)
+        if prediction == 1:
+            result = "AI-Generated"
+        else:
+            result = "Human-Written"
 
-    return jsonify({
-        'prediction': result,
-        'ai_accuracy': ai_accuracy,
-        'human_accuracy': human_accuracy
-    })
+        ai_accuracy = round(ai_probability * 100, 2)
+        human_accuracy = round(human_probability * 100, 2)
 
+        return jsonify({
+            'prediction': result,
+            'ai_accuracy': ai_accuracy,
+            'human_accuracy': human_accuracy
+        })
 
+    except Exception as e:
+        print(f"Error processing request: {e}")
+        return jsonify({'error': str(e)}), 500
 
 def handler(event, context):
     return app(event, context)
