@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "postinstall": "pip install -r api/requirements.txt"
+    "postinstall": "pip install -r requirements.txt"
   },
   "dependencies": {
     "react": "^18.3.1",
